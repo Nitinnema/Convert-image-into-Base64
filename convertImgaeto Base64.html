@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
+	</style>
+</head>
+<body>
+
+
+	<div id="formDiv" class="container" style="padding: 10px; padding-top: 2px; margin-top: 2%;">
+		<div class="row">
+			<div class="col-sm-12">
+				<h4><strong>Upload a image file to convert base64 format</strong></h4>
+				<div class="form-group has-feedback">
+					<input type="file" id="inputFileToLOad" class="form-control" placeholder="photo" accept="image/png, image/jpeg" required />
+					<i class="glyphicon glyphicon-globe form-control-feedback"></i>
+				</div>
+				<button id="BaseToImage">Base 64 to Image</button>
+				<div class="container">
+					<img src="" id="preview" class="image-responsive" style="display: none;">
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+<script type="text/javascript">
+
+	// $(document).ready(function(){
+	// 	$('#BaseToImage').click(function(){
+	// 		document.getElementById('preview').setAttribute('src', $("#response").val());
+	// 		$("#preview").show();
+	// 	});
+	// });
+
+
+
+	$(document).ready(function(){
+		$('#BaseToImage').click(function(){
+			var filesSelected = document.getElementById("inputFileToLOad").files;
+			if(filesSelected.length>0){
+				var fileToLoad = filesSelected[0];
+				var fileReader = new FileReader();
+				fileReader.onload = function(fileLoadedEvent){
+					var base64value = fileLoadedEvent.target.result;
+					console.log(base64value);
+					$('#response').val(base64value);
+				};
+				fileReader.readAsDataURL(fileToLoad);
+			}
+		});
+	});
+</script>
+</html>
